@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="calcstyles.css">
+    <title>Calculator</title>
+    <style>
+        .calcbutton {
+            width: 100%;
+            height: 100%;
+            background-color: #00FF00;
+            font-size: 1.75em;
+        }
+        .calctable {
+            width: 50%;
+        }
+        td {
+            width: 25%;
+        }
+        @media only screen and (max-width: 600px) {
+            .calcbutton {
+                font-size: 1.35em;
+            }
+            .calctable {
+                width: 90%;
+            }
+        }
+    </style>
+    <script src="calcfunc.min.js"></script> <!-- EVALUATES THE GIVEN EXPRESSION -->
+</head>
+
+<body>
+    <div class="appbar">Arithmetic Calculator</div>
+    <br>
+    <br>
+    <div>
+        <center>
+            <form action="javascript:thiseval();">
+                <table border=1 height=300px class="calctable">
+                    <tr>
+                        <th colspan=4 style="background-color: #FFFFFF; table-layout: fixed;">
+                            <input name="myresult" id="myresult" style="text-align: right; width: 98%; font-size: 2em;" onkeypress="javascript:checkequalto(event);">
+                        </th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="calcbutton" value="(" onclick="showval('(');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value=")" onclick="showval(')');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="&larr;" onclick="onebk();">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="C" onclick="clrthis();">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="calcbutton" value="7" onclick="showval(7);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="8" onclick="showval(8);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="9" onclick="showval(9);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="÷" onclick="showval('/');">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="calcbutton" value="4" onclick="showval(4);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="5" onclick="showval(5);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="6" onclick="showval(6);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="×" onclick="showval('*');">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="calcbutton" value="1" onclick="showval(1);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="2" onclick="showval(2);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="3" onclick="showval(3);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="-" onclick="showval('-');">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="calcbutton" value="0" onclick="showval(0);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="." onclick="showval('.');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="^" onclick="showval('^');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="+" onclick="showval('+');">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="calcbutton" value="Random" onclick="showval('('+Math.random()+')');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="π" onclick="showval('π');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="e" onclick="showval('e');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="mod" onclick="showval('%');">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan=4>
+                            <input type="submit" class="calcbutton" value="=">
+                            <input type="button" class="calcbutton" value="=" onclick="thiseval();" style="display: none;">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </center>
+    </div>
+    <h1>Calculation history</h1>
+    <div>
+        <center>
+            <table id="histtable"></table>
+        </center>
+    </div>
+    <script>
+        //This array contains the history of all calculations and solutions
+        var ephst = [];
+
+        //Detect if the user has typed "equal to", and solve the expression
+        function checkequalto(event) {
+            if (event.which == 61 || event.keyCode == 61) {
+                document.forms[0].submit();
+            }
+        }
+
+        //Generates error messages for syntax and division by zero errors
+        function zeroerror(x) {
+            document.getElementById("myresult").value = x;
+        }
+        setInterval(function() {
+            var p = document.getElementById('myresult').value;
+            p = p.replace("*", "×");
+            p = p.replace("/", "÷");
+            p = p.replace("%", "mod");
+            document.getElementById('myresult').value = p;
+        }, 100);
+
+        //Display the value of the calculator button pressed
+        function showval(x) {
+            var p = document.getElementById('myresult').value;
+            p += x;
+            document.getElementById('myresult').value = p;
+        }
+
+        //Main function to evaluate the given expression 
+        function thiseval() {
+            var p = document.getElementById('myresult').value;
+            //Before proceeding, we need to replace some expressions with JavaScript compatible equivalents
+            //Halt if error message is detected
+            if (p != "Cannot divide by zero" && p != "Syntax error") {
+                p = p.replace("=", "");
+                var ep = p;
+                ep = ep.replace(/π/g, "(" + Math.PI + ")");
+                ep = ep.replace(/e/g, "(" + Math.E + ")");
+                ep = ep.replace(/×/g, "*");
+                ep = ep.replace(/÷/g, "/");
+                ep = ep.replace(/mod/g, "%");
+                ep = ep.replace(/\[/g, "(");
+                ep = ep.replace(/{/g, "(");
+                ep = ep.replace(/]/g, ")");
+                ep = ep.replace(/}/g, ")");
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")(", ")*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace("0(", "0*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace("1(", "1*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace("2(", "2*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace("3(", "3*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace("4(", "4*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace("5(", "5*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace("6(", "6*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace("7(", "7*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace("8(", "8*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace("9(", "9*(");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")0", ")*0");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")1", ")*1");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")2", ")*2");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")3", ")*3");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")4", ")*4");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")5", ")*5");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")6", ")*6");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")7", ")*7");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")8", ")*8");
+                }
+                for (var i = 0; i < ep.length; i++) {
+                    ep = ep.replace(")9", ")*9");
+                }
+                var q = solve(calculate(ep)); //This actually solves the refined expression
+                if (typeof(q) !== "undefined") {
+                    document.getElementById('myresult').value = q;
+                    var arr1 = [ep, p, q];
+                    ephst.push(arr1);
+                    document.getElementById('histtable').innerHTML = '';
+                    gethst();
+                }
+            }
+        }
+
+        //Reset the calculator display
+        function clrthis() {
+            document.getElementById('myresult').value = '';
+        }
+
+        //Perform backspace function by removing the last entered character
+        function onebk() {
+            var p = document.getElementById('myresult').value;
+            var l = p.length;
+            if (l > 0) {
+                var r = p.slice(0, -1);
+                document.getElementById('myresult').value = r;
+            }
+        }
+
+        //Function to create table rows
+        function createTr(a, b) {
+            var y = document.createElement("TR");
+            y.setAttribute("id", b);
+            document.getElementById(a).appendChild(y);
+        }
+
+        //Function to create data cells
+        function createTd(a, b) {
+            var z = document.createElement("TD");
+            z.setAttribute("id", b);
+            document.getElementById(a).appendChild(z);
+        }
+
+        //Function to create header cells
+        function createTh(a, b) {
+            var z = document.createElement("TH");
+            z.appendChild(document.createTextNode(b));
+            document.getElementById(a).appendChild(z);
+        }
+
+        //Generate the placeholders in the calculation history table
+        function getval1(a, b) {
+            var x = document.createElement("INPUT");
+            x.setAttribute("id", b);
+            x.setAttribute("class", "histtablevalues");
+            x.style.width = "98%";
+            x.style.fontSize = "1em";
+            x.readOnly = true;
+            x.onclick = function() {
+                document.getElementById("myresult").value = x.value;
+            };
+            document.getElementById(a).appendChild(x);
+        }
+
+        //Insert the value into the respective placeholders
+        function getval2(a, b) {
+            document.getElementById(a).value = b;
+        }
+
+        //Display the calculation history
+        function gethst() {
+            for (var i = 0; i < ephst.length; i++) {
+                var trid = "trno";
+                trid += i;
+                var td1id = "td1no";
+                var td2id = "td2no";
+                var td1val = "td1val";
+                var td2val = "td2val";
+                td1id += i;
+                td2id += i;
+                td1val += i;
+                td2val += i;
+                createTr("histtable", trid)
+                createTd(trid, td1id);
+                createTd(trid, td2id);
+                getval1(td1id, td1val);
+                getval1(td2id, td2val);
+                getval2(td1val, (ephst[i][1]));
+                getval2(td2val, JSON.stringify(ephst[i][2]));
+                toggledarkmode(); //Newly added cells will have either light or dark mode based on the whole page.
+            }
+        }
+    </script>
+    <script src="calccolormode.js"></script> <!-- THIS SCRIPT ENABLES DARK MODE AT NIGHT -->
+</body>
+
+</html>
