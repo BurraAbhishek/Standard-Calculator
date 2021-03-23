@@ -9,7 +9,7 @@ Mathematical constants Pi (3.14 approx.) and e (2.71 approx.) are also supported
 
 ### NOTE: The next version will be released soon with the following additions:
 
-Users can now upload/download calculation history.
+Users can soon upload/download calculation history.
 
 Support to toggle light / dark mode
 
