@@ -7,14 +7,6 @@ Supported operations: Exponent, Addition, Subtraction, Multiplication, Division,
 
 Mathematical constants Pi (3.14 approx.) and e (2.71 approx.) are also supported by this calculator
 
-### NOTE: The next version will be released soon with the following additions:
-
-Users can soon upload/download calculation history.
-
-Support to toggle light / dark mode
-
-This software will also have the option to use JavaScript eval() for other operations like trigonometric operations.
-
 ## Privacy Policy
 
 All operations are performed in the browser. No information is transmitted over the Internet while you're using this app.
