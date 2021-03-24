@@ -1,33 +1,20 @@
-var dflipflop = 0;
-
-//First decide if the calculator is standalone or to be used as integrated with this OS.
-function getuserid() {
-    var x = "";
-    if (sessionStorage.filename) {
-        var x = sessionStorage.getItem("filename");
-        dflipflop = 1;
-    }
-    validateuser(x);
-}
-
-//Next locate the user data
-function validateuser(u) {
-    if (typeof(u) !== "undefined" && typeof(u) !== "null") {
-        if (u != "") {
-            var x = JSON.parse(localStorage.getItem(u));
-            //Verify integrity of user data first
-            if (typeof(x['gnumber']) == "number") {
-                //File is safe
-                //Verify if user data supports dark mode of app
-                if (x['calccolormode'] == "Default") {
-                    default_color_mode();
-                } else if (x['calccolormode'] == "Dark") {
-                    dark_color_mode();
-                    if (typeof(document.getElementById('colormodeicn') !== "undefined")) {
-                        document.getElementById('colormodeicn').src = "icn/darkmode.png";
-                    }
-                }
+function toggledarkmode(){
+    if(typeof(Storage)!=="undefined"){
+        if(!localStorage.calccolormode){
+            var d = new Date();
+            //Initially toggle light and dark mode based on time. Light mode between 6 A.M. and 6 P.M.
+            if(d.getHours()>=6&&d.getHours()<18){
+                localStorage.setItem("calccolormode","Default");
+            }else{
+                localStorage.setItem("calccolormode","Dark");
             }
+        }
+        //Toggle light and dark mode based on user preferences
+        var x = localStorage.getItem("calccolormode");
+        if(x=="Default"){
+            default_color_mode();
+        }else if(x=="Dark"){
+            dark_color_mode();
         }
     }
 }
@@ -96,4 +83,4 @@ function dark_color_mode() {
     document.body.style.backgroundColor = "#777777";
 }
 
-getuserid();
+toggledarkmode();
