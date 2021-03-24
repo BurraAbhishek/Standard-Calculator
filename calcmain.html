@@ -4,36 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="calcstyles.css">
+    <link rel="stylesheet" type="text/css" href="css/calcstyles.css">
     <title>Calculator</title>
-    <style>
-        .calcbutton {
-            width: 100%;
-            height: 100%;
-            background-color: #00FF00;
-            font-size: 1.75em;
-        }
-        .calctable {
-            width: 50%;
-        }
-        td {
-            width: 25%;
-        }
-        @media only screen and (max-width: 600px) {
-            .calcbutton {
-                font-size: 1.35em;
-            }
-            .calctable {
-                width: 90%;
-            }
-        }
-    </style>
-    <script src="calcfunc.min.js"></script> <!-- EVALUATES THE GIVEN EXPRESSION -->
+    <link rel="icon" type="image/png" href="images/calcicon.png">
+    <script src="js/calcfunc.min.js"></script> <!-- SCRIPT CONTAINING THE FUNCTIONS REQUIRED TO EVALUATE THE GIVEN EXPRESSION -->
 </head>
 
 <body>
     <div class="appbar">Arithmetic Calculator</div>
-    <br>
     <br>
     <div>
         <center>
@@ -41,6 +19,7 @@
                 <table border=1 height=300px class="calctable">
                     <tr>
                         <th colspan=4 style="background-color: #FFFFFF; table-layout: fixed;">
+                            <label for="myresult"></label>
                             <input name="myresult" id="myresult" style="text-align: right; width: 98%; font-size: 2em;" onkeypress="javascript:checkequalto(event);">
                         </th>
                     </tr>
@@ -138,11 +117,31 @@
             </form>
         </center>
     </div>
-    <h1>Calculation history</h1>
-    <div>
-        <center>
-            <table id="histtable"></table>
-        </center>
+    <h1 style="margin-block-start:0.5em;margin-block-end:0">
+        <table style="border:none">
+            <tr>
+                <td class="appfun_td">
+                    <img id="histonoff" src="images/historyon.png" alt="Toggle history visibility" onclick="show_Calc_history();" class="app_function_icon">
+                </td>
+                <td class="appfun_td">
+                    <img id="histdownload" src="images/downloadhistory.png" alt="Save calculation history" onclick="download_history();" class="app_function_icon">
+                </td>
+                <td class="appfun_td">
+                    <img id="histupload" src="images/uploadhistory.png" alt="Upload history file" onclick="upload_history();" class="app_function_icon">
+                </td>
+                <td class="appfun_td">
+                    <img id="colormodeicn" src="images/darkmode.png" alt="Toggle light/dark mode" onclick="enable_dark_mode();" class="app_function_icon">
+                </td>
+            </tr>
+        </table>
+    </h1>
+    <div id="calc_history_div" style="display:none">
+        <h1>Calculation history</h1>
+        <div>
+            <center>
+                <table id="histtable"></table>
+            </center>
+        </div>
     </div>
     <script>
         //This array contains the history of all calculations and solutions
@@ -155,10 +154,12 @@
             }
         }
 
-        //Generates error messages for syntax and division by zero errors
+        //Generates error messages for syntax errors and division by zero errors
         function zeroerror(x) {
             document.getElementById("myresult").value = x;
         }
+
+        //Convert display to mathematical form
         setInterval(function() {
             var p = document.getElementById('myresult').value;
             p = p.replace("*", "×");
@@ -174,7 +175,7 @@
             document.getElementById('myresult').value = p;
         }
 
-        //Main function to evaluate the given expression 
+        //Main function to evaluate the given expression
         function thiseval() {
             var p = document.getElementById('myresult').value;
             //Before proceeding, we need to replace some expressions with JavaScript compatible equivalents
@@ -343,8 +344,45 @@
                 toggledarkmode(); //Newly added cells will have either light or dark mode based on the whole page.
             }
         }
+
+        //Show the calculation history
+        function show_Calc_history() {
+            document.getElementById("calc_history_div").style.display = "block";
+            document.getElementById("histonoff").src = "images/historyoff.png";
+            document.getElementById("histonoff").onclick = function() {
+                hide_Calc_history();
+            }
+        }
+
+        //Hide the calculation history
+        function hide_Calc_history() {
+            document.getElementById("calc_history_div").style.display = "none";
+            document.getElementById("histonoff").src = "images/historyon.png";
+            document.getElementById("histonoff").onclick = function() {
+                show_Calc_history();
+            }
+        }
+
+        //Enable dark mode
+        function enable_dark_mode() {
+            dark_color_mode();
+            document.getElementById("colormodeicn").src = "images/lightmode.png";
+            document.getElementById("colormodeicn").onclick = function() {
+                enable_default_mode();
+            }
+        }
+
+        //Enable light mode
+        function enable_default_mode() {
+            default_color_mode();
+            document.getElementById("colormodeicn").src = "images/darkmode.png";
+            document.getElementById("colormodeicn").onclick = function() {
+                enable_dark_mode();
+            }
+        }
     </script>
-    <script src="calccolormode.js"></script> <!-- THIS SCRIPT ENABLES DARK MODE AT NIGHT -->
+    <script src="js/calccolormode.js"></script> <!-- CONTAINS THE CODE TO TOGGLE LIGHT AND DARK MODE -->
+    <script src="js/calchist.js"></script> <!-- CONTAINS THE TEMPLATE FILE FOR THE CALCULATION HISTORY -->
 </body>
 
 </html>
