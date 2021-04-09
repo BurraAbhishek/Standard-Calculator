@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/calcstyles.css">
     <title>Calculator</title>
-    <link rel="icon" type="image/png" href="images/calcicon.png">
+    <link rel="icon" type="image/png" href="images/calcicon.png"> <!-- FAVICON -->
     <script src="js/calcfunc.min.js"></script> <!-- SCRIPT CONTAINING THE FUNCTIONS REQUIRED TO EVALUATE THE GIVEN EXPRESSION -->
 </head>
 
@@ -15,7 +15,7 @@
     <br>
     <div>
         <center>
-            <form action="javascript:thiseval();">
+            <form action="javascript:eval_expression();">
                 <table border=1 height=300px class="calctable">
                     <tr>
                         <th colspan=4 style="background-color: #FFFFFF; table-layout: fixed;">
@@ -25,92 +25,92 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="button" class="calcbutton" value="(" onclick="showval('(');">
+                            <input type="button" class="calcbutton" value="(" onclick="show_character('(');">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value=")" onclick="showval(')');">
+                            <input type="button" class="calcbutton" value=")" onclick="show_character(')');">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="&larr;" onclick="onebk();">
+                            <input type="button" class="calcbutton" value="&larr;" onclick="display_backspace();">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="C" onclick="clrthis();">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="button" class="calcbutton" value="7" onclick="showval(7);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="8" onclick="showval(8);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="9" onclick="showval(9);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="÷" onclick="showval('/');">
+                            <input type="button" class="calcbutton" value="C" onclick="reset_display();">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="button" class="calcbutton" value="4" onclick="showval(4);">
+                            <input type="button" class="calcbutton" value="7" onclick="show_character(7);">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="5" onclick="showval(5);">
+                            <input type="button" class="calcbutton" value="8" onclick="show_character(8);">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="6" onclick="showval(6);">
+                            <input type="button" class="calcbutton" value="9" onclick="show_character(9);">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="×" onclick="showval('*');">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="button" class="calcbutton" value="1" onclick="showval(1);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="2" onclick="showval(2);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="3" onclick="showval(3);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="-" onclick="showval('-');">
+                            <input type="button" class="calcbutton" value="÷" onclick="show_character('/');">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="button" class="calcbutton" value="0" onclick="showval(0);">
+                            <input type="button" class="calcbutton" value="4" onclick="show_character(4);">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="." onclick="showval('.');">
+                            <input type="button" class="calcbutton" value="5" onclick="show_character(5);">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="^" onclick="showval('^');">
+                            <input type="button" class="calcbutton" value="6" onclick="show_character(6);">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="+" onclick="showval('+');">
+                            <input type="button" class="calcbutton" value="×" onclick="show_character('*');">
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="button" class="calcbutton" value="Random" onclick="showval('('+Math.random()+')');">
+                            <input type="button" class="calcbutton" value="1" onclick="show_character(1);">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="π" onclick="showval('π');">
+                            <input type="button" class="calcbutton" value="2" onclick="show_character(2);">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="e" onclick="showval('e');">
+                            <input type="button" class="calcbutton" value="3" onclick="show_character(3);">
                         </td>
                         <td>
-                            <input type="button" class="calcbutton" value="mod" onclick="showval('%');">
+                            <input type="button" class="calcbutton" value="-" onclick="show_character('-');">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="calcbutton" value="0" onclick="show_character(0);">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="." onclick="show_character('.');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="^" onclick="show_character('^');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="+" onclick="show_character('+');">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" class="calcbutton" value="Random" onclick="show_character('('+Math.random()+')');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="π" onclick="show_character('π');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="e" onclick="show_character('e');">
+                        </td>
+                        <td>
+                            <input type="button" class="calcbutton" value="mod" onclick="show_character('%');">
                         </td>
                     </tr>
                     <tr>
                         <td colspan=4>
                             <input type="submit" class="calcbutton" value="=">
-                            <input type="button" class="calcbutton" value="=" onclick="thiseval();" style="display: none;">
+                            <input type="button" class="calcbutton" value="=" onclick="eval_expression();" style="display: none;">
                         </td>
                     </tr>
                 </table>
@@ -145,7 +145,7 @@
     </div>
     <script>
         //This array contains the history of all calculations and solutions
-        var ephst = [];
+        var calculation_history_object = [];
 
         //Detect if the user has typed "equal to", and solve the expression
         function checkequalto(event) {
@@ -169,14 +169,14 @@
         }, 100);
 
         //Display the value of the calculator button pressed
-        function showval(x) {
+        function show_character(x) {
             var p = document.getElementById('myresult').value;
             p += x;
             document.getElementById('myresult').value = p;
         }
 
         //Main function to evaluate the given expression
-        function thiseval() {
+        function eval_expression() {
             var p = document.getElementById('myresult').value;
             //Before proceeding, we need to replace some expressions with JavaScript compatible equivalents
             //Halt if error message is detected
@@ -259,20 +259,20 @@
                 if (typeof(q) !== "undefined") {
                     document.getElementById('myresult').value = q;
                     var arr1 = [ep, p, q];
-                    ephst.push(arr1);
+                    calculation_history_object.push(arr1);
                     document.getElementById('histtable').innerHTML = '';
-                    gethst();
+                    get_calculation_history();
                 }
             }
         }
 
         //Reset the calculator display
-        function clrthis() {
+        function reset_display() {
             document.getElementById('myresult').value = '';
         }
 
         //Perform backspace function by removing the last entered character
-        function onebk() {
+        function display_backspace() {
             var p = document.getElementById('myresult').value;
             var l = p.length;
             if (l > 0) {
@@ -303,7 +303,7 @@
         }
 
         //Generate the placeholders in the calculation history table
-        function getval1(a, b) {
+        function create_history_placeHolder(a, b) {
             var x = document.createElement("INPUT");
             x.setAttribute("id", b);
             x.setAttribute("class", "histtablevalues");
@@ -317,31 +317,31 @@
         }
 
         //Insert the value into the respective placeholders
-        function getval2(a, b) {
+        function fill_history_placeHolder(a, b) {
             document.getElementById(a).value = b;
         }
 
         //Display the calculation history
-        function gethst() {
-            for (var i = 0; i < ephst.length; i++) {
-                var trid = "trno";
-                trid += i;
-                var td1id = "td1no";
-                var td2id = "td2no";
-                var td1val = "td1val";
-                var td2val = "td2val";
+        function get_calculation_history() {
+            for (var i = 0; i < calculation_history_object.length; i++) {
+                var tr_id = "tr_position_";
+                tr_id += i;
+                var td1id = "td1cell";
+                var td2id = "td2cell";
+                var td1value = "td1value";
+                var td2value = "td2value";
                 td1id += i;
                 td2id += i;
-                td1val += i;
-                td2val += i;
-                createTr("histtable", trid)
-                createTd(trid, td1id);
-                createTd(trid, td2id);
-                getval1(td1id, td1val);
-                getval1(td2id, td2val);
-                getval2(td1val, (ephst[i][1]));
-                getval2(td2val, JSON.stringify(ephst[i][2]));
-                toggledarkmode(); //Newly added cells will have either light or dark mode based on the whole page.
+                td1value += i;
+                td2value += i;
+                createTr("histtable", tr_id)
+                createTd(tr_id, td1id);
+                createTd(tr_id, td2id);
+                create_history_placeHolder(td1id, td1value);
+                create_history_placeHolder(td2id, td2value);
+                fill_history_placeHolder(td1value, (calculation_history_object[i][1]));
+                fill_history_placeHolder(td2value, JSON.stringify(calculation_history_object[i][2]));
+                toggle_colorMode(); //Newly added cells will have either light or dark mode based on the whole page.
             }
         }
 
