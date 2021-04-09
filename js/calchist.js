@@ -26,7 +26,7 @@ function download_history() {
     filedata += JSON.stringify(y);
     filedata += ";";
     var filename = "calculation_history_";
-    filename += dt;
+    filename += time_stamp;
     filename += ".js";
     savedata(filename, filedata);
 }
