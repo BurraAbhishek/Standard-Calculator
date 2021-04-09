@@ -50,6 +50,9 @@ function default_color_mode() {
     document.getElementById("myresult").style.backgroundColor = "initial";
     document.getElementById("myresult").style.color = "initial";
     document.body.style.backgroundColor = "transparent";
+    if(typeof(Storage) !== "undefined"){
+        localStorage.setItem("calccolormode","Default");
+    }
 }
 
 // Dark mode color setting
@@ -82,6 +85,9 @@ function dark_color_mode() {
     document.getElementById("myresult").style.backgroundColor = "#000000";
     document.getElementById("myresult").style.color = "#FF0000";
     document.body.style.backgroundColor = "#777777";
+    if(typeof(Storage) !== "undefined"){
+        localStorage.setItem("calccolormode","Dark");
+    }
 }
 
 toggle_colorMode();
