@@ -17,56 +17,56 @@ var savedata = (function() {
 
 // This function downloads the calculation history locally as a JavaScript file
 function download_history() {
-    var dt = new Date().getTime();
+    var time_stamp = new Date().getTime();
     var y = {
-        "timesaved": dt,
-        "history_data": ephst
+        "timesaved": time_stamp,
+        "history_data": calculation_history_object
     }
-    var x = "var calc_history_file=";
-    x += JSON.stringify(y);
-    x += ";";
-    var z = "calculation_history_";
-    z += dt;
-    z += ".js";
-    savedata(z, x);
+    var filedata = "var calc_history_file=";
+    filedata += JSON.stringify(y);
+    filedata += ";";
+    var filename = "calculation_history_";
+    filename += dt;
+    filename += ".js";
+    savedata(filename, filedata);
 }
 
 // This function uploads the calculation history file for use in this calculator
 function upload_history() {
     if (confirm("NOTICE: \n 1. You can choose whether to select the files or to manually type the file URL.\n 2. If you are using Internet Explorer or other older browsers, you have to type the file URL manually. \n 3. Click OK to select files. \n 4. Click Cancel to manually type the file URL. \n 5. To cancel this operation, select Cancel twice.")) {
         var file;
-        var s = document.createElement("input");
-        s.setAttribute("type", "file");
-        s.onchange = function(e) {
+        var fileinput = document.createElement("input");
+        fileinput.setAttribute("type", "file");
+        fileinput.onchange = function(e) {
             file = e.target.files[0];
             var reader = new FileReader();
             reader.onload = function(event) {
                 var contents = event.target.result;
                 eval(contents);
                 if (typeof(calc_history_file) !== "undefined") {
-                    var d = calc_history_file["history_data"];
-                    for (var i = 0; i < d.length; i++) {
-                        ephst.push(d[i]);
+                    var filecontents = calc_history_file["history_data"];
+                    for (var i = 0; i < filecontents.length; i++) {
+                        calculation_history_object.push(filecontents[i]);
                     }
-                    gethst();
+                    get_calculation_history();
                 }
             }
             reader.readAsText(file);
         }
-        s.click();
+        fileinput.click();
     } else {
-        var t = prompt("Enter the file path. To cancel this operation, select 'Cancel'.");
-        if (typeof(t) !== "undefined" && t !== null) {
-            var c = document.createElement("script");
-            c.src = t;
-            c.async = false;
-            c.onload = function() {
+        var filepath = prompt("Enter the file path. To cancel this operation, select 'Cancel'.");
+        if (typeof(filepath) !== "undefined" && filepath !== null) {
+            var calc_datascript = document.createElement("script");
+            calc_datascript.src = filepath;
+            calc_datascript.async = false;
+            calc_datascript.onload = function() {
                 loadCalcHistoryFile();
             }
-            c.onerror = function() {
+            calc_datascript.onerror = function() {
                 alert("Invalid URL typed. The file must be accessible.");
             }
-            document.body.appendChild(c);
+            document.body.appendChild(calc_datascript);
         }
     }
 
@@ -77,8 +77,8 @@ function loadCalcHistoryFile() {
     if (typeof(calc_history_file) !== "undefined") {
         var d = calc_history_file["history_data"];
         for (var i = 0; i < d.length; i++) {
-            ephst.push(d[i]);
+            calculation_history_object.push(d[i]);
         }
-        gethst();
+        get_calculation_history();
     }
 }
