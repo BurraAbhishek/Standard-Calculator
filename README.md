@@ -20,6 +20,15 @@ Supported features:
 
 Mathematical constants Pi (3.14 approx.) and e (2.71 approx.) are also supported by this calculator
 
+## Getting Started
+
+To get started, 
+1. Either download this entire repository or clone using:
+```
+$ git clone https://github.com/BurraAbhishek/Standard-Calculator.git
+```
+2. Next, open the calcmain.html file in your preferred browser. This program works well across all modern browsers. The calculator is now ready to work for you!
+
 ## Privacy Policy
 
 1. All operations are performed in the browser. No information is transmitted over the Internet while you're using this app.
