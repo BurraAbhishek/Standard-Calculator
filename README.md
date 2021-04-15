@@ -34,3 +34,8 @@ $ git clone https://github.com/BurraAbhishek/Standard-Calculator.git
 1. All operations are performed in the browser. No information is transmitted over the Internet while you're using this app.
 3. This application uses browser storage (DOM storage) to store user preferences on light mode and dark mode.
 3. When you're saving a calculation history, it downloads a JavaScript file. This file contains an array which stores the timestamp of saving the file and the saved calculations. You can only upload these JavaScript files to load your calculation history.
+
+## License
+The source code is licensed under the terms of the MIT License, unless mentioned otherwise.
+
+The icons and images used in this web application are licensed under the Creative Commons CC0 License.
