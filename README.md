@@ -1,5 +1,8 @@
 # Standard-Calculator
-A JavaScript-based standard calculator which can solve many expressions, even with nested brackets
+
+<img src="https://github.com/BurraAbhishek/Standard-Calculator/blob/main/screenshots/fullpage.png" alt="Homepage" title="This calculator comes with light and dark theme, this screenshot shows the dark theme" />
+
+This program is a JavaScript-based standard calculator which can solve many expressions, even with nested brackets
 
 This app is mobile friendly and supports nested brackets.
 
