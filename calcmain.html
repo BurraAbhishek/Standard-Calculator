@@ -11,7 +11,34 @@
 </head>
 
 <body>
-    <div class="appbar">Arithmetic Calculator</div>
+    <div class="appbar" style="display:flex">
+        <span>
+            <div class="main-dropdown">
+                <button onclick="toggleDropdown()" style="background-color:inherit;border:none">
+                    <img class="dropbtn" src="images/menu_bar.png" alt="Options" style="height:auto;width:auto;float:left;max-height:32px;max-width:10vw">
+                </button>
+                <div class="main-dropdown-content" id="main-dropdown-content" style="max-width:100vw">
+                    <div>
+                        <img id="histonoff" src="images/historyon.png" alt="Toggle history visibility" onclick="show_Calc_history();" class="app_function_icon">
+                        <span id="histonoff_span">Show calculation history</span>
+                    </div>
+                    <div>
+                         <img id="histdownload" src="images/downloadhistory.png" alt="Save calculation history" onclick="download_history();" class="app_function_icon">
+                         <span>Download calculation history</span>
+                    </div>
+                    <div>
+                         <img id="histupload" src="images/uploadhistory.png" alt="Upload history file" onclick="upload_history();" class="app_function_icon">
+                         <span>Upload calculation history</span>
+                    </div>
+                    <div>
+                         <img id="colormodeicn" src="images/darkmode.png" alt="Toggle light/dark mode" onclick="enable_dark_mode();" class="app_function_icon">
+                         <span id="colormode_span">Dark color theme</span>
+                    </div>
+                </div>
+            </div>
+        </span>
+        <span style="text-align: center;width: 90vw">Arithmetic Calculator</span>
+    </div>
     <br>
     <div>
         <center>
@@ -117,24 +144,6 @@
             </form>
         </center>
     </div>
-    <h1 style="margin-block-start:0.5em;margin-block-end:0">
-        <table style="border:none">
-            <tr>
-                <td class="appfun_td">
-                    <img id="histonoff" src="images/historyon.png" alt="Toggle history visibility" onclick="show_Calc_history();" class="app_function_icon">
-                </td>
-                <td class="appfun_td">
-                    <img id="histdownload" src="images/downloadhistory.png" alt="Save calculation history" onclick="download_history();" class="app_function_icon">
-                </td>
-                <td class="appfun_td">
-                    <img id="histupload" src="images/uploadhistory.png" alt="Upload history file" onclick="upload_history();" class="app_function_icon">
-                </td>
-                <td class="appfun_td">
-                    <img id="colormodeicn" src="images/darkmode.png" alt="Toggle light/dark mode" onclick="enable_dark_mode();" class="app_function_icon">
-                </td>
-            </tr>
-        </table>
-    </h1>
     <div id="calc_history_div" style="display:none">
         <h1>Calculation history</h1>
         <div>
@@ -348,6 +357,7 @@
         //Show the calculation history
         function show_Calc_history() {
             document.getElementById("calc_history_div").style.display = "block";
+            document.getElementById("histonoff_span").innerHTML = "Hide calculation history";
             document.getElementById("histonoff").src = "images/historyoff.png";
             document.getElementById("histonoff").onclick = function() {
                 hide_Calc_history();
@@ -357,6 +367,7 @@
         //Hide the calculation history
         function hide_Calc_history() {
             document.getElementById("calc_history_div").style.display = "none";
+            document.getElementById("histonoff_span").innerHTML = "Show calculation history";
             document.getElementById("histonoff").src = "images/historyon.png";
             document.getElementById("histonoff").onclick = function() {
                 show_Calc_history();
@@ -367,6 +378,7 @@
         function enable_dark_mode() {
             dark_color_mode();
             document.getElementById("colormodeicn").src = "images/lightmode.png";
+            document.getElementById("colormode_span").innerHTML = "Light color theme";
             document.getElementById("colormodeicn").onclick = function() {
                 enable_default_mode();
             }
@@ -376,13 +388,32 @@
         function enable_default_mode() {
             default_color_mode();
             document.getElementById("colormodeicn").src = "images/darkmode.png";
+            document.getElementById("colormode_span").innerHTML = "Dark color theme";
             document.getElementById("colormodeicn").onclick = function() {
                 enable_dark_mode();
+            }
+        }
+        //Toggle dropdown visibility
+        function toggleDropdown() {
+            if(document.getElementById("main-dropdown-content").style.display == "none") {
+                document.getElementById("main-dropdown-content").style.display = "block"
+            } else {
+                document.getElementById("main-dropdown-content").style.display = "none";
             }
         }
     </script>
     <script src="js/calccolormode.js"></script> <!-- CONTAINS THE CODE TO TOGGLE LIGHT AND DARK MODE -->
     <script src="js/calchist.js"></script> <!-- CONTAINS THE TEMPLATE FILE FOR THE CALCULATION HISTORY -->
+    <script>
+        //If dark mode is chosen by user preference, enable dark mode.
+        if(typeof(Storage) !== "undefined") {
+            if(typeof(localStorage.calccolormode) !== "undefined") {
+                if(localStorage.calccolormode == "Dark") {
+                    enable_dark_mode();
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>
