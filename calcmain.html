@@ -18,20 +18,20 @@
                     <img class="dropbtn" src="images/menu_bar.png" alt="Options" style="height:auto;width:auto;float:left;max-height:32px;max-width:10vw">
                 </button>
                 <div class="main-dropdown-content" id="main-dropdown-content" style="max-width:100vw">
-                    <div>
-                        <img id="histonoff" src="images/historyon.png" alt="Toggle history visibility" onclick="show_Calc_history();" class="app_function_icon">
+                    <div id="histonoff_div" onclick="show_Calc_history();">
+                        <img id="histonoff" src="images/historyon.png" alt="Toggle calculation history visibility" class="app_function_icon">
                         <span id="histonoff_span">Show calculation history</span>
                     </div>
-                    <div>
-                         <img id="histdownload" src="images/downloadhistory.png" alt="Save calculation history" onclick="download_history();" class="app_function_icon">
+                    <div onclick="download_history();">
+                         <img id="histdownload" src="images/downloadhistory.png" alt="Download calculation history" class="app_function_icon">
                          <span>Download calculation history</span>
                     </div>
-                    <div>
-                         <img id="histupload" src="images/uploadhistory.png" alt="Upload history file" onclick="upload_history();" class="app_function_icon">
+                    <div onclick="upload_history();">
+                         <img id="histupload" src="images/uploadhistory.png" alt="Upload history file" class="app_function_icon">
                          <span>Upload calculation history</span>
                     </div>
-                    <div>
-                         <img id="colormodeicn" src="images/darkmode.png" alt="Toggle light/dark mode" onclick="enable_dark_mode();" class="app_function_icon">
+                    <div id="colormodediv" onclick="enable_dark_mode();">
+                         <img id="colormodeicn" src="images/darkmode.png" alt="Toggle light/dark mode" class="app_function_icon">
                          <span id="colormode_span">Dark color theme</span>
                     </div>
                 </div>
@@ -359,7 +359,7 @@
             document.getElementById("calc_history_div").style.display = "block";
             document.getElementById("histonoff_span").innerHTML = "Hide calculation history";
             document.getElementById("histonoff").src = "images/historyoff.png";
-            document.getElementById("histonoff").onclick = function() {
+            document.getElementById("histonoff_div").onclick = function() {
                 hide_Calc_history();
             }
         }
@@ -369,7 +369,7 @@
             document.getElementById("calc_history_div").style.display = "none";
             document.getElementById("histonoff_span").innerHTML = "Show calculation history";
             document.getElementById("histonoff").src = "images/historyon.png";
-            document.getElementById("histonoff").onclick = function() {
+            document.getElementById("histonoff_div").onclick = function() {
                 show_Calc_history();
             }
         }
@@ -379,7 +379,7 @@
             dark_color_mode();
             document.getElementById("colormodeicn").src = "images/lightmode.png";
             document.getElementById("colormode_span").innerHTML = "Light color theme";
-            document.getElementById("colormodeicn").onclick = function() {
+            document.getElementById("colormodediv").onclick = function() {
                 enable_default_mode();
             }
         }
@@ -389,7 +389,7 @@
             default_color_mode();
             document.getElementById("colormodeicn").src = "images/darkmode.png";
             document.getElementById("colormode_span").innerHTML = "Dark color theme";
-            document.getElementById("colormodeicn").onclick = function() {
+            document.getElementById("colormodediv").onclick = function() {
                 enable_dark_mode();
             }
         }
