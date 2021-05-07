@@ -208,7 +208,7 @@ function resolve(a) {
         }
         return solve(a);
     } catch (err) {
-        if (err == "RangeError: Maximum call stack size exceeded") {
+        if (err != "Cannot divide by zero") {
             err = "Syntax error";
         }
         zeroerror(err);
