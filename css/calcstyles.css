@@ -50,8 +50,17 @@ td {
     width: 25%;
 }
 .app_function_icon {
-    width: 5vw;
+    width: 3.5vw;
     padding: 0 1vw
+}
+.main-dropdown-content {
+    display: none;
+    position: absolute;
+    font-size: 0.95em;
+    padding: 1% 1%;
+    background-color: #0000FF;
+    min-width: 20vw;
+    z-index: 1;
 }
 @media only screen and (max-width: 600px) {
     .calcbutton {
@@ -61,7 +70,11 @@ td {
         width: 90%;
     }
     .app_function_icon {
-        width: 15vw;
+        width: 10.5vw;
         padding: 0 2vw
+    }
+    .main-dropdown-content {
+        max-width: 100vw;
+        font-size: 0.8em;
     }
 }
