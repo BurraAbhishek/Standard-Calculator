@@ -25,12 +25,33 @@ Mathematical constants `Pi` (3.14 approx.) and `e` (2.71 approx.) are also suppo
 
 ## Getting Started
 
-To get started, 
+Want to try this calculator? Visit [https://burraabhishek.github.io/Standard-Calculator/](https://burraabhishek.github.io/Standard-Calculator/)
+
+To use this calculator locally on your device, 
 1. Either download this entire repository or clone using:
 ```
 $ git clone https://github.com/BurraAbhishek/Standard-Calculator.git
 ```
 2. Next, open the index.html file in your preferred browser. This program works well across all modern browsers, including Internet Explorer 11.
+
+## Usage
+
+### Calculations
+You can either type the expression or press the calculator buttons to generate your expressions.
+
+### Accessing the options menu
+1. Click the three green bars in the top left corner of the app:
+
+    <img src="https://github.com/BurraAbhishek/Standard-Calculator/blob/main/images/menu_bar.png" height=24px width=24px alt="Three green bars">
+
+2. The dropdown will look like this: 
+
+    <img src="https://github.com/BurraAbhishek/Standard-Calculator/blob/main/screenshots/darkmode_all.png" alt="Site-dropdown">
+    
+3. Select the appropriate option to perform a given task. For example, clicking on "Hide calculation history" will immediately hide your calculation history. 
+    To show it again, select "Show calculation history".
+
+NOTE: Clicking outside the dropdown won't hide it! Click the three green bars again to hide it.
 
 ## Privacy Policy
 
