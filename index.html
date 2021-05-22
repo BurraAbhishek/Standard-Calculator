@@ -379,6 +379,7 @@
             dark_color_mode();
             document.getElementById("colormodeicn").src = "images/lightmode.png";
             document.getElementById("colormode_span").innerHTML = "Light color theme";
+            document.getElementById("main-dropdown-content").style.backgroundColor = "#AA0000";
             document.getElementById("colormodediv").onclick = function() {
                 enable_default_mode();
             }
@@ -389,6 +390,7 @@
             default_color_mode();
             document.getElementById("colormodeicn").src = "images/darkmode.png";
             document.getElementById("colormode_span").innerHTML = "Dark color theme";
+            document.getElementById("main-dropdown-content").style.backgroundColor = "#0000FF";
             document.getElementById("colormodediv").onclick = function() {
                 enable_dark_mode();
             }
