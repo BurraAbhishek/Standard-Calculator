@@ -77,6 +77,19 @@ var calc_history_file = {
 - [This file](https://github.com/BurraAbhishek/Standard-Calculator/blob/main/sample_saved_calculations/calculation_history_1620392276251.pretty.js) is a more readable version of the above file.
 - [This file](https://github.com/BurraAbhishek/Standard-Calculator/blob/main/sample_saved_calculations/calculation_history_1620392276251.json) is the JSON version of the above file: remove `var calc_history_file = ` at the beginning and `;` at the end of the downloaded file, and save it as a JSON file.
 
+## Testing
+This site is tested using [webhint.io](https://webhint.io) for improving the following:
+- Accessibility
+- Cross-browser compatibility
+- Performance
+- Security
+
+The test results depend on two factors:
+- Site code
+- Server configuration
+
+On this [website](https://burraabhishek.github.io/Standard-Calculator/), all current hints are triggered due to server configurations.
+
 ## License
 The source code is licensed under the terms of the MIT License, unless mentioned otherwise.
 
