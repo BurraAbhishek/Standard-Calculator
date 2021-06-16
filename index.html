@@ -11,13 +11,13 @@
 </head>
 
 <body>
-    <div class="appbar" style="display:flex">
+    <div class="appbar">
         <span>
             <div class="main-dropdown">
-                <button onclick="toggleDropdown()" style="background-color:inherit;border:none">
-                    <img class="dropbtn" src="images/menu_bar.png" alt="Options" style="height:auto;width:auto;float:left;max-height:32px;max-width:10vw">
+                <button class="toggle_dropdown" onclick="toggleDropdown()">
+                    <img class="dropbtn" src="images/menu_bar.png" alt="Options">
                 </button>
-                <div class="main-dropdown-content" id="main-dropdown-content" style="max-width:100vw">
+                <div class="main-dropdown-content" id="main-dropdown-content">
                     <div id="histonoff_div" onclick="show_Calc_history();">
                         <img id="histonoff" src="images/historyon.png" alt="Toggle calculation history visibility" class="app_function_icon">
                         <span id="histonoff_span">Show calculation history</span>
@@ -37,7 +37,7 @@
                 </div>
             </div>
         </span>
-        <span style="text-align: center;width: 90vw">Arithmetic Calculator</span>
+        <span class="appbar_text">Arithmetic Calculator</span>
     </div>
     <br>
     <div>
@@ -45,9 +45,9 @@
             <form action="javascript:eval_expression();">
                 <table border=1 height=300px class="calctable">
                     <tr>
-                        <th colspan=4 style="background-color: #FFFFFF; table-layout: fixed;">
+                        <th colspan=4 class="myresult-container">
                             <label for="myresult"></label>
-                            <input name="myresult" id="myresult" style="text-align: right; width: 98%; font-size: 2em;" onkeypress="javascript:checkequalto(event);">
+                            <input name="myresult" class="myresult" id="myresult" onkeypress="javascript:checkequalto(event);">
                         </th>
                     </tr>
                     <tr>
@@ -137,14 +137,13 @@
                     <tr>
                         <td colspan=4>
                             <input type="submit" class="calcbutton" value="=">
-                            <input type="button" class="calcbutton" value="=" onclick="eval_expression();" style="display: none;">
                         </td>
                     </tr>
                 </table>
             </form>
         </center>
     </div>
-    <div id="calc_history_div" style="display:none">
+    <div class="hidden-container" id="calc_history_div">
         <h1>Calculation history</h1>
         <div>
             <center>
