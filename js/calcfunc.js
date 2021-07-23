@@ -81,7 +81,6 @@ function modulo(a, b) {
 }
 
 //Before we begin calculation, we have to do some pre-processing
-//Original solution by Michael Maw on StackOverflow has been modified for this calculator in the below function
 //We analyze the string one character at the time and generate the expression array
 
 function calculate(x) {
@@ -102,7 +101,7 @@ function calculate(x) {
     if (b !== '') {
         a.push(parseFloat(b));
     }
-    var h = a.filter(function(e) {
+    var h = a.filter(function (e) {
         return !Number.isNaN(e);
     });
     return splitBracket(h);
@@ -150,45 +149,45 @@ function splitBracket(a) {
 
 //The two functions resolve() and solve() solves the given expression array.
 
-//This function resolve() evaluates mathematical expressions and returns a solution
+//This function solve() evaluates mathematical expressions and returns a solution
 
-function resolve(a) {
+function solve(a) {
     try {
         for (i = 0; i < a.length; i++) {
-            if (typeof(a[i]) === "object") {
-                x = solve(a[i]);
+            if (typeof (a[i]) === "object") {
+                x = resolve(a[i]);
             }
         }
         for (i = 0; i < a.length; i++) {
-            if (typeof(a[i]) === "object") {
-                x = solve(a[i]);
+            if (typeof (a[i]) === "object") {
+                x = resolve(a[i]);
             }
         }
         for (i = 0; i < a.length; i++) {
             if (a[i] == "^") {
-                q = Math.pow(solve(a[i - 1]), solve(a[i + 1]));
+                q = Math.pow(resolve(a[i - 1]), resolve(a[i + 1]));
                 a[i - 1] = q;
                 a.splice(i, 2);
             }
         }
         for (i = 0; i < a.length; i++) {
             if (a[i] == "/" || a[i] == "÷") {
-                if (typeof(a[i + 1]) === "undefined" || typeof(a[i + 1]) === "null" || a[i + 1] == 0) {
+                if (typeof (a[i + 1]) === "undefined" || typeof (a[i + 1]) === "null" || a[i + 1] == 0) {
                     throw "Cannot divide by zero";
                 } else {
-                    q = divide(solve(a[i - 1]), solve(a[i + 1]));
+                    q = divide(resolve(a[i - 1]), resolve(a[i + 1]));
                     a[i - 1] = q;
                     a.splice(i, 2);
                 }
             } else if (a[i] == "*" || a[i] == "×") {
-                q = multiply(solve(a[i - 1]), solve(a[i + 1]));
-                if (typeof(a[i - 1]) === "undefined" || typeof(a[i + 1]) === "undefined") {
+                q = multiply(resolve(a[i - 1]), resolve(a[i + 1]));
+                if (typeof (a[i - 1]) === "undefined" || typeof (a[i + 1]) === "undefined") {
                     q = 0;
                 };
                 a[i - 1] = q;
                 a.splice(i, 2);
             } else if (a[i] == "%") {
-                q = modulo(solve(a[i - 1]), solve(a[i + 1]));
+                q = modulo(resolve(a[i - 1]), resolve(a[i + 1]));
                 a[i - 1] = q;
                 a.splice(i, 2);
             }
@@ -196,17 +195,17 @@ function resolve(a) {
         for (j = 1; j < a.length + 1; j++) {
             for (i = 0; i < 2; i++) {
                 if (a[i] == "+") {
-                    q = add(solve(a[i - 1]), solve(a[i + 1]));
+                    q = add(resolve(a[i - 1]), resolve(a[i + 1]));
                     a[i - 1] = q;
                     a.splice(i, 2);
                 } else if (a[i] == "-") {
-                    q = subtract(solve(a[i - 1]), solve(a[i + 1]));
+                    q = subtract(resolve(a[i - 1]), resolve(a[i + 1]));
                     a[i - 1] = q;
                     a.splice(i, 2);
                 }
             }
         }
-        return solve(a);
+        return resolve(a);
     } catch (err) {
         if (err != "Cannot divide by zero") {
             err = "Syntax error";
@@ -217,24 +216,24 @@ function resolve(a) {
 
 //Sometimes, we get an array or an invalid result as the solution. This function resolves them into valid solutions or generates appropriate errors.
 
-function solve(a) {
+function resolve(a) {
     try {
-        if (typeof(a) === "number") {
+        if (typeof (a) === "number") {
             c = a;
-        } else if (typeof(a) === "object") {
+        } else if (typeof (a) === "object") {
             if (a.length == 0) {
                 c = 0;
             } else if (a.length == 1) {
-                c = solve(a[0])
+                c = resolve(a[0])
             } else {
                 for (var i = 0; i < a.length; i++) {
-                    if (typeof(a[i] === "object")) {
+                    if (typeof (a[i] === "object")) {
                         if (a[i].length == 1) {
                             a[i] = a[i][0];
                         }
                     }
                 }
-                c = resolve(a);
+                c = solve(a);
             }
         }
         return c;
