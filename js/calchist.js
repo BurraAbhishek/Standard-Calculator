@@ -1,13 +1,13 @@
 // This function creates the BLOB file saving interface.
-var savedata = (function() {
+var savedata = (function () {
     var a = document.createElement("a");
     document.body.appendChild(a);
     a.style.display = "none";
-    return function(f, t) {
+    return function (f, t) {
         blob = new Blob([t], {
             type: "octet/stream"
         }),
-        url = window.URL.createObjectURL(blob);
+            url = window.URL.createObjectURL(blob);
         a.href = url;
         a.download = f;
         a.click();
@@ -37,13 +37,13 @@ function upload_history() {
         var file;
         var fileinput = document.createElement("input");
         fileinput.setAttribute("type", "file");
-        fileinput.onchange = function(e) {
+        fileinput.onchange = function (e) {
             file = e.target.files[0];
             var reader = new FileReader();
-            reader.onload = function(event) {
+            reader.onload = function (event) {
                 var contents = event.target.result;
                 eval(contents);
-                if (typeof(calc_history_file) !== "undefined") {
+                if (typeof (calc_history_file) !== "undefined") {
                     var filecontents = calc_history_file["history_data"];
                     for (var i = 0; i < filecontents.length; i++) {
                         calculation_history_object.push(filecontents[i]);
@@ -56,14 +56,14 @@ function upload_history() {
         fileinput.click();
     } else {
         var filepath = prompt("Enter the file path. To cancel this operation, select 'Cancel'.");
-        if (typeof(filepath) !== "undefined" && filepath !== null) {
+        if (typeof (filepath) !== "undefined" && filepath !== null) {
             var calc_datascript = document.createElement("script");
             calc_datascript.src = filepath;
             calc_datascript.async = false;
-            calc_datascript.onload = function() {
+            calc_datascript.onload = function () {
                 loadCalcHistoryFile();
             }
-            calc_datascript.onerror = function() {
+            calc_datascript.onerror = function () {
                 alert("Invalid URL typed. The file must be accessible.");
             }
             document.body.appendChild(calc_datascript);
@@ -74,7 +74,7 @@ function upload_history() {
 
 // Once the file is loaded into the application, load it into the UI
 function loadCalcHistoryFile() {
-    if (typeof(calc_history_file) !== "undefined") {
+    if (typeof (calc_history_file) !== "undefined") {
         var d = calc_history_file["history_data"];
         for (var i = 0; i < d.length; i++) {
             calculation_history_object.push(d[i]);
