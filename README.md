@@ -34,6 +34,8 @@ $ git clone https://github.com/BurraAbhishek/Standard-Calculator.git
 ```
 2. Next, open the index.html file in your preferred browser. This program works well across all modern browsers, including Internet Explorer 11.
 
+NOTE: This repository uses [prettier](https://prettier.io) for code formatting.
+
 ## Usage
 
 ### Calculations
@@ -87,8 +89,6 @@ This site is tested using [webhint.io](https://webhint.io) for improving the fol
 The test results depend on two factors:
 - Site code
 - Server configuration
-
-On this [website](https://burraabhishek.github.io/Standard-Calculator/), all current hints are triggered due to server configurations.
 
 ## License
 The source code is licensed under the terms of the MIT License, unless mentioned otherwise.
