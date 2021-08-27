@@ -27,6 +27,10 @@ function default_color_mode() {
         a[i].style.backgroundColor = "#FF0000";
         a[i].style.color = "#00FFFF";
     }
+    var b = document.getElementsByClassName("appbar_text");
+    for (var i = 0; i < b.length; i++) {
+        b[i].style.color = "#FFFF00";
+    }
     var c = document.getElementsByClassName("calcbutton");
     for (var i = 0; i < c.length; i++) {
         c[i].style.backgroundColor = "#00FF00";
@@ -60,7 +64,11 @@ function dark_color_mode() {
     var a = document.getElementsByClassName("appbar");
     for (var i = 0; i < a.length; i++) {
         a[i].style.backgroundColor = "#111111";
-        a[i].style.color = "#FF0000";
+        a[i].style.color = "#FFAA00";
+    }
+    var b = document.getElementsByClassName("appbar_text");
+    for (var i = 0; i < b.length; i++) {
+        b[i].style.color = "#FF0000";
     }
     var c = document.getElementsByClassName("calcbutton");
     for (var i = 0; i < c.length; i++) {
