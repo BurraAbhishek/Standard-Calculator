@@ -1,4 +1,5 @@
-//The extra code in the basic arithmetic operations overcomes JavaScript precision issues in almost all cases
+// The extra code in the basic arithmetic operations
+// overcomes JavaScript precision issues in almost all cases
 
 function add(a, b) {
     var c = 0;
@@ -15,7 +16,7 @@ function add(a, b) {
     } else {
         d = a.toString().split(".")[1].length || 0;
         g = b.toString().split(".")[1].length || 0;
-        d > g ? j = d : j = g;
+        d > g ? (j = d) : (j = g);
         f = (a + b).toFixed(j);
         c = (f - 2 + 2).toFixed(j);
     }
@@ -37,7 +38,7 @@ function subtract(a, b) {
     } else {
         d = a.toString().split(".")[1].length || 0;
         g = b.toString().split(".")[1].length || 0;
-        d > g ? j = d : j = g;
+        d > g ? (j = d) : (j = g);
         f = (a - b).toFixed(j);
         c = (f - 2 + 2).toFixed(j);
     }
@@ -69,7 +70,7 @@ function divide(a, b) {
     if (b == 0) {
         c = "Cannot divide by zero";
     } else {
-        c = (a / b);
+        c = a / b;
         return c;
     }
 }
@@ -80,25 +81,26 @@ function modulo(a, b) {
     return c;
 }
 
-//Before we begin calculation, we have to do some pre-processing
-//We analyze the string one character at the time and generate the expression array
+// Before we begin calculation, we have to do some pre-processing
+// We analyze the string one character at the time,
+// and generate the expression array
 
 function calculate(x) {
     a = [];
-    b = '';
-    for (var i = 0, c; c = x.charAt(i); i++) {
-        if ('^*/+-×÷(){}[]%'.indexOf(c) > -1) {
-            if (b == '' && c == '-' && (x[i - 1] != ')')) {
-                b = '-';
+    b = "";
+    for (var i = 0, c; (c = x.charAt(i)); i++) {
+        if ("^*/+-×÷(){}[]%".indexOf(c) > -1) {
+            if (b == "" && c == "-" && x[i - 1] != ")") {
+                b = "-";
             } else {
                 a.push(parseFloat(b), c);
-                b = '';
+                b = "";
             }
         } else {
             b += x.charAt(i);
         }
     }
-    if (b !== '') {
+    if (b !== "") {
         a.push(parseFloat(b));
     }
     var h = a.filter(function (e) {
@@ -107,7 +109,8 @@ function calculate(x) {
     return splitBracket(h);
 }
 
-//This function encloses brackets in separate arrays. Very useful if expressions have nested brackets.
+// This function encloses brackets in separate arrays. 
+// Very useful if expressions have nested brackets.
 
 function splitBracket(a) {
     if (a[0] == "+") {
@@ -119,10 +122,10 @@ function splitBracket(a) {
     l = 0;
     g = 0;
     for (var i = 0; i < a.length; i++) {
-        if ((a[i] == "{") || (a[i] == "[")) {
+        if (a[i] == "{" || a[i] == "[") {
             a[i] = "(";
         }
-        if ((a[i] == "}") || (a[i] == "]")) {
+        if (a[i] == "}" || a[i] == "]") {
             a[i] = ")";
         }
     }
@@ -147,19 +150,20 @@ function splitBracket(a) {
     return a;
 }
 
-//The two functions resolve() and solve() solves the given expression array.
+// The two functions resolve() and solve() solves the given expression array.
 
-//This function solve() evaluates mathematical expressions and returns a solution
+// This function solve() evaluates mathematical expressions 
+// and returns a solution
 
 function solve(a) {
     try {
         for (i = 0; i < a.length; i++) {
-            if (typeof (a[i]) === "object") {
+            if (typeof a[i] === "object") {
                 x = resolve(a[i]);
             }
         }
         for (i = 0; i < a.length; i++) {
-            if (typeof (a[i]) === "object") {
+            if (typeof a[i] === "object") {
                 x = resolve(a[i]);
             }
         }
@@ -172,7 +176,11 @@ function solve(a) {
         }
         for (i = 0; i < a.length; i++) {
             if (a[i] == "/" || a[i] == "÷") {
-                if (typeof (a[i + 1]) === "undefined" || typeof (a[i + 1]) === "null" || a[i + 1] == 0) {
+                if (
+                    typeof a[i + 1] === "undefined" ||
+                    typeof a[i + 1] === "null" ||
+                    a[i + 1] == 0
+                ) {
                     throw "Cannot divide by zero";
                 } else {
                     q = divide(resolve(a[i - 1]), resolve(a[i + 1]));
@@ -181,9 +189,12 @@ function solve(a) {
                 }
             } else if (a[i] == "*" || a[i] == "×") {
                 q = multiply(resolve(a[i - 1]), resolve(a[i + 1]));
-                if (typeof (a[i - 1]) === "undefined" || typeof (a[i + 1]) === "undefined") {
+                if (
+                    typeof a[i - 1] === "undefined" ||
+                    typeof a[i + 1] === "undefined"
+                ) {
                     q = 0;
-                };
+                }
                 a[i - 1] = q;
                 a.splice(i, 2);
             } else if (a[i] == "%") {
@@ -214,17 +225,19 @@ function solve(a) {
     }
 }
 
-//Sometimes, we get an array or an invalid result as the solution. This function resolves them into valid solutions or generates appropriate errors.
+// Sometimes, we get an array or an invalid result as the solution. 
+// This function resolves them into valid solutions,
+// or generates appropriate errors.
 
 function resolve(a) {
     try {
-        if (typeof (a) === "number") {
+        if (typeof a === "number") {
             c = a;
-        } else if (typeof (a) === "object") {
+        } else if (typeof a === "object") {
             if (a.length == 0) {
                 c = 0;
             } else if (a.length == 1) {
-                c = resolve(a[0])
+                c = resolve(a[0]);
             } else {
                 for (var i = 0; i < a.length; i++) {
                     if (typeof (a[i] === "object")) {
@@ -238,6 +251,6 @@ function resolve(a) {
         }
         return c;
     } catch (err) {
-        zeroerror("Syntax error")
+        zeroerror("Syntax error");
     }
 }

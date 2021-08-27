@@ -1,9 +1,10 @@
 function toggle_colorMode() {
-    if (typeof (Storage) !== "undefined") {
+    if (typeof Storage !== "undefined") {
         // Check if setting is already enabled in local storage.
         if (!localStorage.calccolormode) {
             var d = new Date();
-            // Initially toggle light and dark mode based on time. Light mode between 6 A.M. and 6 P.M.
+            // Initially toggle light and dark mode based on time.
+            // Light mode between 6 A.M. and 6 P.M. by default
             if (d.getHours() >= 6 && d.getHours() < 18) {
                 localStorage.setItem("calccolormode", "Default");
             } else {
@@ -54,7 +55,7 @@ function default_color_mode() {
     document.getElementById("myresult").style.backgroundColor = "initial";
     document.getElementById("myresult").style.color = "initial";
     document.body.style.backgroundColor = "transparent";
-    if (typeof (Storage) !== "undefined") {
+    if (typeof Storage !== "undefined") {
         localStorage.setItem("calccolormode", "Default");
     }
 }
@@ -93,7 +94,7 @@ function dark_color_mode() {
     document.getElementById("myresult").style.backgroundColor = "#000000";
     document.getElementById("myresult").style.color = "#FF0000";
     document.body.style.backgroundColor = "#777777";
-    if (typeof (Storage) !== "undefined") {
+    if (typeof Storage !== "undefined") {
         localStorage.setItem("calccolormode", "Dark");
     }
 }

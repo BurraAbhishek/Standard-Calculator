@@ -1,420 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="css/calcstyles.css" />
+        <title>Calculator</title>
+        <link rel="icon" type="image/png" href="images/calcicon.png" />
+        <!-- FAVICON -->
+        <script src="js/calcfunc.min.js"></script>
+        <!-- SCRIPT CONTAINING THE FUNCTIONS REQUIRED TO EVALUATE THE GIVEN EXPRESSION -->
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/calcstyles.css">
-    <title>Calculator</title>
-    <link rel="icon" type="image/png" href="images/calcicon.png"> <!-- FAVICON -->
-    <script src="js/calcfunc.min.js"></script> <!-- SCRIPT CONTAINING THE FUNCTIONS REQUIRED TO EVALUATE THE GIVEN EXPRESSION -->
-</head>
-
-<body>
-    <div class="appbar">
-        <span>
-            <div class="main-dropdown">
-                <button class="toggle_dropdown" onclick="toggleDropdown()">
-                    <img class="dropbtn" src="images/menu_bar.png" alt="Options">
-                </button>
-                <div class="main-dropdown-content" id="main-dropdown-content">
-                    <div id="histonoff_div" onclick="show_Calc_history();">
-                        <img id="histonoff" src="images/historyon.png" alt="Toggle calculation history visibility" class="app_function_icon">
-                        <span id="histonoff_span">Show calculation history</span>
-                    </div>
-                    <div onclick="download_history();">
-                         <img id="histdownload" src="images/downloadhistory.png" alt="Download calculation history" class="app_function_icon">
-                         <span>Download calculation history</span>
-                    </div>
-                    <div onclick="upload_history();">
-                         <img id="histupload" src="images/uploadhistory.png" alt="Upload history file" class="app_function_icon">
-                         <span>Upload calculation history</span>
-                    </div>
-                    <div id="colormodediv" onclick="enable_dark_mode();">
-                         <img id="colormodeicn" src="images/darkmode.png" alt="Toggle light/dark mode" class="app_function_icon">
-                         <span id="colormode_span">Dark color theme</span>
+    <body>
+        <div class="appbar">
+            <span>
+                <div class="main-dropdown">
+                    <button class="toggle_dropdown" onclick="toggleDropdown()">
+                        <img
+                            class="dropbtn"
+                            src="images/menu_bar.png"
+                            alt="Options"
+                        />
+                    </button>
+                    <div
+                        class="main-dropdown-content"
+                        id="main-dropdown-content"
+                    >
+                        <div id="histonoff_div" onclick="show_Calc_history();">
+                            <img
+                                id="histonoff"
+                                src="images/historyon.png"
+                                alt="Toggle calculation history visibility"
+                                class="app_function_icon"
+                            />
+                            <span id="histonoff_span"
+                                >Show calculation history</span
+                            >
+                        </div>
+                        <div onclick="download_history();">
+                            <img
+                                id="histdownload"
+                                src="images/downloadhistory.png"
+                                alt="Download calculation history"
+                                class="app_function_icon"
+                            />
+                            <span>Download calculation history</span>
+                        </div>
+                        <div onclick="upload_history();">
+                            <img
+                                id="histupload"
+                                src="images/uploadhistory.png"
+                                alt="Upload history file"
+                                class="app_function_icon"
+                            />
+                            <span>Upload calculation history</span>
+                        </div>
+                        <div id="colormodediv" onclick="enable_dark_mode();">
+                            <img
+                                id="colormodeicn"
+                                src="images/darkmode.png"
+                                alt="Toggle light/dark mode"
+                                class="app_function_icon"
+                            />
+                            <span id="colormode_span">Dark color theme</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </span>
-        <span class="appbar_text">Arithmetic Calculator</span>
-    </div>
-    <br>
-    <div>
-        <center>
-            <form action="javascript:eval_expression();">
-                <table border=1 height=300px class="calctable">
-                    <tr>
-                        <th colspan=4 class="myresult-container">
-                            <label for="myresult"></label>
-                            <input name="myresult" class="myresult" id="myresult" onkeypress="javascript:checkequalto(event);">
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="button" class="calcbutton" value="(" onclick="show_character('(');">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value=")" onclick="show_character(')');">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="&larr;" onclick="display_backspace();">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="C" onclick="reset_display();">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="button" class="calcbutton" value="7" onclick="show_character(7);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="8" onclick="show_character(8);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="9" onclick="show_character(9);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="÷" onclick="show_character('/');">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="button" class="calcbutton" value="4" onclick="show_character(4);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="5" onclick="show_character(5);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="6" onclick="show_character(6);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="×" onclick="show_character('*');">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="button" class="calcbutton" value="1" onclick="show_character(1);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="2" onclick="show_character(2);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="3" onclick="show_character(3);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="-" onclick="show_character('-');">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="button" class="calcbutton" value="0" onclick="show_character(0);">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="." onclick="show_character('.');">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="^" onclick="show_character('^');">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="+" onclick="show_character('+');">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="button" class="calcbutton" value="Random" onclick="show_character('('+Math.random()+')');">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="π" onclick="show_character('π');">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="e" onclick="show_character('e');">
-                        </td>
-                        <td>
-                            <input type="button" class="calcbutton" value="mod" onclick="show_character('%');">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan=4>
-                            <input type="submit" class="calcbutton" value="=">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </center>
-    </div>
-    <div class="hidden-container" id="calc_history_div">
-        <h1>Calculation history</h1>
+            </span>
+            <span class="appbar_text">Arithmetic Calculator</span>
+        </div>
+        <br />
         <div>
             <center>
-                <table id="histtable"></table>
+                <form action="javascript:eval_expression();">
+                    <table border="1" height="300px" class="calctable">
+                        <tr>
+                            <th colspan="4" class="myresult-container">
+                                <label for="myresult"></label>
+                                <input
+                                    name="myresult"
+                                    class="myresult"
+                                    id="myresult"
+                                    onkeypress="javascript:checkequalto(event);"
+                                />
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="("
+                                    onclick="show_character('(');"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value=")"
+                                    onclick="show_character(')');"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="&larr;"
+                                    onclick="display_backspace();"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="C"
+                                    onclick="reset_display();"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="7"
+                                    onclick="show_character(7);"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="8"
+                                    onclick="show_character(8);"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="9"
+                                    onclick="show_character(9);"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="÷"
+                                    onclick="show_character('/');"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="4"
+                                    onclick="show_character(4);"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="5"
+                                    onclick="show_character(5);"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="6"
+                                    onclick="show_character(6);"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="×"
+                                    onclick="show_character('*');"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="1"
+                                    onclick="show_character(1);"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="2"
+                                    onclick="show_character(2);"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="3"
+                                    onclick="show_character(3);"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="-"
+                                    onclick="show_character('-');"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="0"
+                                    onclick="show_character(0);"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="."
+                                    onclick="show_character('.');"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="^"
+                                    onclick="show_character('^');"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="+"
+                                    onclick="show_character('+');"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="Random"
+                                    onclick="show_character('('+Math.random()+')');"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="π"
+                                    onclick="show_character('π');"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="e"
+                                    onclick="show_character('e');"
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="button"
+                                    class="calcbutton"
+                                    value="mod"
+                                    onclick="show_character('%');"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <input
+                                    type="submit"
+                                    class="calcbutton"
+                                    value="="
+                                />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </center>
         </div>
-    </div>
-    <script>
-        //This array contains the history of all calculations and solutions
-        var calculation_history_object = [];
+        <div class="hidden-container" id="calc_history_div">
+            <h1>Calculation history</h1>
+            <div>
+                <center>
+                    <table id="histtable"></table>
+                </center>
+            </div>
+        </div>
+        <script>
+            //This array contains the history of all calculations and solutions
+            var calculation_history_object = [];
 
-        //Detect if the user has typed "equal to", and solve the expression
-        function checkequalto(event) {
-            if (event.which == 61 || event.keyCode == 61) {
-                document.forms[0].submit();
-            }
-        }
-
-        //Generates error messages for syntax errors and division by zero errors
-        function zeroerror(x) {
-            document.getElementById("myresult").value = x;
-        }
-
-        //Convert display to mathematical form
-        setInterval(function() {
-            var p = document.getElementById('myresult').value;
-            p = p.replace("*", "×");
-            p = p.replace("/", "÷");
-            p = p.replace("%", "mod");
-            document.getElementById('myresult').value = p;
-        }, 100);
-
-        //Display the value of the calculator button pressed
-        function show_character(x) {
-            var p = document.getElementById('myresult').value;
-            p += x;
-            document.getElementById('myresult').value = p;
-        }
-
-        //Main function to evaluate the given expression
-        function eval_expression() {
-            var p = document.getElementById('myresult').value;
-            //Before proceeding, we need to replace some expressions with JavaScript compatible equivalents
-            //Halt if error message is detected
-            if (p != "Cannot divide by zero" && p != "Syntax error") {
-                p = p.replace("=", "");
-                var ep = p;
-                ep = ep.replace(/π/g, "(" + Math.PI + ")");
-                ep = ep.replace(/e/g, "(" + Math.E + ")");
-                ep = ep.replace(/×/g, "*");
-                ep = ep.replace(/÷/g, "/");
-                ep = ep.replace(/mod/g, "%");
-                ep = ep.replace(/\[/g, "(");
-                ep = ep.replace(/{/g, "(");
-                ep = ep.replace(/]/g, ")");
-                ep = ep.replace(/}/g, ")");
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")(", ")*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace("0(", "0*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace("1(", "1*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace("2(", "2*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace("3(", "3*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace("4(", "4*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace("5(", "5*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace("6(", "6*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace("7(", "7*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace("8(", "8*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace("9(", "9*(");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")0", ")*0");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")1", ")*1");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")2", ")*2");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")3", ")*3");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")4", ")*4");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")5", ")*5");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")6", ")*6");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")7", ")*7");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")8", ")*8");
-                }
-                for (var i = 0; i < ep.length; i++) {
-                    ep = ep.replace(")9", ")*9");
-                }
-                var q = solve(calculate(ep)); //This actually solves the refined expression
-                if (typeof(q) !== "undefined") {
-                    document.getElementById('myresult').value = q;
-                    var arr1 = [ep, p, q];
-                    calculation_history_object.push(arr1);
-                    document.getElementById('histtable').innerHTML = '';
-                    get_calculation_history();
+            //Detect if the user has typed "equal to", and solve the expression
+            function checkequalto(event) {
+                if (event.which == 61 || event.keyCode == 61) {
+                    document.forms[0].submit();
                 }
             }
-        }
 
-        //Reset the calculator display
-        function reset_display() {
-            document.getElementById('myresult').value = '';
-        }
-
-        //Perform backspace function by removing the last entered character
-        function display_backspace() {
-            var p = document.getElementById('myresult').value;
-            var l = p.length;
-            if (l > 0) {
-                var r = p.slice(0, -1);
-                document.getElementById('myresult').value = r;
+            //Generates error messages for syntax errors and division by zero errors
+            function zeroerror(x) {
+                document.getElementById("myresult").value = x;
             }
-        }
 
-        //Function to create table rows
-        function createTr(a, b) {
-            var y = document.createElement("TR");
-            y.setAttribute("id", b);
-            document.getElementById(a).appendChild(y);
-        }
+            //Convert display to mathematical form
+            setInterval(function () {
+                var p = document.getElementById("myresult").value;
+                p = p.replace("*", "×");
+                p = p.replace("/", "÷");
+                p = p.replace("%", "mod");
+                document.getElementById("myresult").value = p;
+            }, 100);
 
-        //Function to create data cells
-        function createTd(a, b) {
-            var z = document.createElement("TD");
-            z.setAttribute("id", b);
-            document.getElementById(a).appendChild(z);
-        }
-
-        //Function to create header cells
-        function createTh(a, b) {
-            var z = document.createElement("TH");
-            z.appendChild(document.createTextNode(b));
-            document.getElementById(a).appendChild(z);
-        }
-
-        //Generate the placeholders in the calculation history table
-        function create_history_placeHolder(a, b) {
-            var x = document.createElement("INPUT");
-            x.setAttribute("id", b);
-            x.setAttribute("class", "histtablevalues");
-            x.style.width = "98%";
-            x.style.fontSize = "1em";
-            x.readOnly = true;
-            x.onclick = function() {
-                document.getElementById("myresult").value = x.value;
-            };
-            document.getElementById(a).appendChild(x);
-        }
-
-        //Insert the value into the respective placeholders
-        function fill_history_placeHolder(a, b) {
-            document.getElementById(a).value = b;
-        }
-
-        //Display the calculation history
-        function get_calculation_history() {
-            for (var i = 0; i < calculation_history_object.length; i++) {
-                var tr_id = "tr_position_";
-                tr_id += i;
-                var td1id = "td1cell";
-                var td2id = "td2cell";
-                var td1value = "td1value";
-                var td2value = "td2value";
-                td1id += i;
-                td2id += i;
-                td1value += i;
-                td2value += i;
-                createTr("histtable", tr_id)
-                createTd(tr_id, td1id);
-                createTd(tr_id, td2id);
-                create_history_placeHolder(td1id, td1value);
-                create_history_placeHolder(td2id, td2value);
-                fill_history_placeHolder(td1value, (calculation_history_object[i][1]));
-                fill_history_placeHolder(td2value, JSON.stringify(calculation_history_object[i][2]));
-                toggle_colorMode(); //Newly added cells will have either light or dark mode based on the whole page.
+            //Display the value of the calculator button pressed
+            function show_character(x) {
+                var p = document.getElementById("myresult").value;
+                p += x;
+                document.getElementById("myresult").value = p;
             }
-        }
 
-        //Show the calculation history
-        function show_Calc_history() {
-            document.getElementById("calc_history_div").style.display = "block";
-            document.getElementById("histonoff_span").innerHTML = "Hide calculation history";
-            document.getElementById("histonoff").src = "images/historyoff.png";
-            document.getElementById("histonoff_div").onclick = function() {
-                hide_Calc_history();
+            //Main function to evaluate the given expression
+            function eval_expression() {
+                var p = document.getElementById("myresult").value;
+                //Before proceeding, we need to replace some expressions with JavaScript compatible equivalents
+                //Halt if error message is detected
+                if (p != "Cannot divide by zero" && p != "Syntax error") {
+                    p = p.replace("=", "");
+                    var ep = p;
+                    ep = ep.replace(/π/g, "(" + Math.PI + ")");
+                    ep = ep.replace(/e/g, "(" + Math.E + ")");
+                    ep = ep.replace(/×/g, "*");
+                    ep = ep.replace(/÷/g, "/");
+                    ep = ep.replace(/mod/g, "%");
+                    ep = ep.replace(/\[/g, "(");
+                    ep = ep.replace(/{/g, "(");
+                    ep = ep.replace(/]/g, ")");
+                    ep = ep.replace(/}/g, ")");
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")(", ")*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace("0(", "0*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace("1(", "1*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace("2(", "2*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace("3(", "3*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace("4(", "4*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace("5(", "5*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace("6(", "6*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace("7(", "7*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace("8(", "8*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace("9(", "9*(");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")0", ")*0");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")1", ")*1");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")2", ")*2");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")3", ")*3");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")4", ")*4");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")5", ")*5");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")6", ")*6");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")7", ")*7");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")8", ")*8");
+                    }
+                    for (var i = 0; i < ep.length; i++) {
+                        ep = ep.replace(")9", ")*9");
+                    }
+                    var q = solve(calculate(ep)); //This actually solves the refined expression
+                    if (typeof q !== "undefined") {
+                        document.getElementById("myresult").value = q;
+                        var arr1 = [ep, p, q];
+                        calculation_history_object.push(arr1);
+                        document.getElementById("histtable").innerHTML = "";
+                        get_calculation_history();
+                    }
+                }
             }
-        }
 
-        //Hide the calculation history
-        function hide_Calc_history() {
-            document.getElementById("calc_history_div").style.display = "none";
-            document.getElementById("histonoff_span").innerHTML = "Show calculation history";
-            document.getElementById("histonoff").src = "images/historyon.png";
-            document.getElementById("histonoff_div").onclick = function() {
-                show_Calc_history();
+            //Reset the calculator display
+            function reset_display() {
+                document.getElementById("myresult").value = "";
             }
-        }
 
-        //Enable dark mode
-        function enable_dark_mode() {
-            dark_color_mode();
-            document.getElementById("colormodeicn").src = "images/lightmode.png";
-            document.getElementById("colormode_span").innerHTML = "Light color theme";
-            document.getElementById("main-dropdown-content").style.backgroundColor = "#AA0000";
-            document.getElementById("colormodediv").onclick = function() {
-                enable_default_mode();
+            //Perform backspace function by removing the last entered character
+            function display_backspace() {
+                var p = document.getElementById("myresult").value;
+                var l = p.length;
+                if (l > 0) {
+                    var r = p.slice(0, -1);
+                    document.getElementById("myresult").value = r;
+                }
             }
-        }
 
-        //Enable light mode
-        function enable_default_mode() {
-            default_color_mode();
-            document.getElementById("colormodeicn").src = "images/darkmode.png";
-            document.getElementById("colormode_span").innerHTML = "Dark color theme";
-            document.getElementById("main-dropdown-content").style.backgroundColor = "#0000FF";
-            document.getElementById("colormodediv").onclick = function() {
-                enable_dark_mode();
+            //Function to create table rows
+            function createTr(a, b) {
+                var y = document.createElement("TR");
+                y.setAttribute("id", b);
+                document.getElementById(a).appendChild(y);
             }
-        }
-        //Toggle dropdown visibility
-        function toggleDropdown() {
-            if(document.getElementById("main-dropdown-content").style.display == "none") {
-                document.getElementById("main-dropdown-content").style.display = "block"
-            } else {
-                document.getElementById("main-dropdown-content").style.display = "none";
+
+            //Function to create data cells
+            function createTd(a, b) {
+                var z = document.createElement("TD");
+                z.setAttribute("id", b);
+                document.getElementById(a).appendChild(z);
             }
-        }
-    </script>
-    <script src="js/calccolormode.js"></script> <!-- CONTAINS THE CODE TO TOGGLE LIGHT AND DARK MODE -->
-    <script src="js/calchist.js"></script> <!-- CONTAINS THE TEMPLATE FILE FOR THE CALCULATION HISTORY -->
-    <script>
-        //If dark mode is chosen by user preference, enable dark mode.
-        if(typeof(Storage) !== "undefined") {
-            if(typeof(localStorage.calccolormode) !== "undefined") {
-                if(localStorage.calccolormode == "Dark") {
+
+            //Function to create header cells
+            function createTh(a, b) {
+                var z = document.createElement("TH");
+                z.appendChild(document.createTextNode(b));
+                document.getElementById(a).appendChild(z);
+            }
+
+            //Generate the placeholders in the calculation history table
+            function create_history_placeHolder(a, b) {
+                var x = document.createElement("INPUT");
+                x.setAttribute("id", b);
+                x.setAttribute("class", "histtablevalues");
+                x.style.width = "98%";
+                x.style.fontSize = "1em";
+                x.readOnly = true;
+                x.onclick = function () {
+                    document.getElementById("myresult").value = x.value;
+                };
+                document.getElementById(a).appendChild(x);
+            }
+
+            //Insert the value into the respective placeholders
+            function fill_history_placeHolder(a, b) {
+                document.getElementById(a).value = b;
+            }
+
+            //Display the calculation history
+            function get_calculation_history() {
+                for (var i = 0; i < calculation_history_object.length; i++) {
+                    var tr_id = "tr_position_";
+                    tr_id += i;
+                    var td1id = "td1cell";
+                    var td2id = "td2cell";
+                    var td1value = "td1value";
+                    var td2value = "td2value";
+                    td1id += i;
+                    td2id += i;
+                    td1value += i;
+                    td2value += i;
+                    createTr("histtable", tr_id);
+                    createTd(tr_id, td1id);
+                    createTd(tr_id, td2id);
+                    create_history_placeHolder(td1id, td1value);
+                    create_history_placeHolder(td2id, td2value);
+                    fill_history_placeHolder(
+                        td1value,
+                        calculation_history_object[i][1]
+                    );
+                    fill_history_placeHolder(
+                        td2value,
+                        JSON.stringify(calculation_history_object[i][2])
+                    );
+                    // Newly added cells will have either light or dark mode
+                    // based on the theme of this page.
+                    toggle_colorMode();
+                }
+            }
+
+            //Show the calculation history
+            function show_Calc_history() {
+                document.getElementById("calc_history_div").style.display =
+                    "block";
+                document.getElementById("histonoff_span").innerHTML =
+                    "Hide calculation history";
+                document.getElementById("histonoff").src =
+                    "images/historyoff.png";
+                document.getElementById("histonoff_div").onclick = function () {
+                    hide_Calc_history();
+                };
+            }
+
+            //Hide the calculation history
+            function hide_Calc_history() {
+                document.getElementById("calc_history_div").style.display =
+                    "none";
+                document.getElementById("histonoff_span").innerHTML =
+                    "Show calculation history";
+                document.getElementById("histonoff").src =
+                    "images/historyon.png";
+                document.getElementById("histonoff_div").onclick = function () {
+                    show_Calc_history();
+                };
+            }
+
+            //Enable dark mode
+            function enable_dark_mode() {
+                dark_color_mode();
+                document.getElementById("colormodeicn").src =
+                    "images/lightmode.png";
+                document.getElementById("colormode_span").innerHTML =
+                    "Light color theme";
+                document.getElementById(
+                    "main-dropdown-content"
+                ).style.backgroundColor = "#AA0000";
+                document.getElementById("colormodediv").onclick = function () {
+                    enable_default_mode();
+                };
+            }
+
+            //Enable light mode
+            function enable_default_mode() {
+                default_color_mode();
+                document.getElementById("colormodeicn").src =
+                    "images/darkmode.png";
+                document.getElementById("colormode_span").innerHTML =
+                    "Dark color theme";
+                document.getElementById(
+                    "main-dropdown-content"
+                ).style.backgroundColor = "#0000FF";
+                document.getElementById("colormodediv").onclick = function () {
                     enable_dark_mode();
+                };
+            }
+            //Toggle dropdown visibility
+            function toggleDropdown() {
+                if (
+                    document.getElementById("main-dropdown-content").style
+                        .display == "none"
+                ) {
+                    document.getElementById(
+                        "main-dropdown-content"
+                    ).style.display = "block";
+                } else {
+                    document.getElementById(
+                        "main-dropdown-content"
+                    ).style.display = "none";
                 }
             }
-        }
-    </script>
-</body>
-
+        </script>
+        <script src="js/calccolormode.js"></script>
+        <!-- CONTAINS THE CODE TO TOGGLE LIGHT AND DARK MODE -->
+        <script src="js/calchist.js"></script>
+        <!-- CONTAINS THE TEMPLATE FILE FOR THE CALCULATION HISTORY -->
+        <script>
+            //If dark mode is chosen by user preference, enable dark mode.
+            if (typeof Storage !== "undefined") {
+                if (typeof localStorage.calccolormode !== "undefined") {
+                    if (localStorage.calccolormode == "Dark") {
+                        enable_dark_mode();
+                    }
+                }
+            }
+        </script>
+    </body>
 </html>
